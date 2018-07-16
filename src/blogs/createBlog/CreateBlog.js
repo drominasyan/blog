@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link, Redirect} from "react-router-dom";
+import { ListGroup, Col, ListGroupItem, Button} from 'react-bootstrap';
 
 class CreateBlog extends Component {
     constructor (props) {
@@ -15,11 +15,13 @@ class CreateBlog extends Component {
                 newBlog = {
                     id: Object.keys(blogs).length,
                     authorId: parseInt(localStorage.getItem("activeUserId")),
+                    authorName: JSON.parse(localStorage.getItem("users"))[parseInt(localStorage.getItem("activeUserId"))]["username"],
                     title: title,
                     description: description,
                     comment: ""
                 };
             blogs[newBlog["id"]] = newBlog;
+            console.log(newBlog);
             localStorage.setItem("blogs", JSON.stringify(blogs));
             this.props.history.push("/blogs");
         }
@@ -27,12 +29,12 @@ class CreateBlog extends Component {
 
     render() {
         return (
-            <div className="App">
+            <Col xs={12} md={4}>
                 <h3>Create Blog</h3>
-                <input type="text" placeholder="Enter Title" ref="title"/>
-                <input type="text" placeholder="Enter Description" ref="description"/>
-                <button onClick={this.createBlog}>Create Blog</button>
-            </div>
+                <input type="text" class="form-control mb-2" placeholder="Enter Title" ref="title"/>
+                <textarea class="form-control mb-2" placeholder="Enter Description" ref="description"></textarea>
+                <Button bsStyle="primary" onClick={this.createBlog}>Create Blog</Button>
+            </Col>
         );
     }
 }

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Redirect } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {Button} from 'react-bootstrap';
+
 
 class Login extends Component {
     constructor (props) {
@@ -41,16 +43,19 @@ class Login extends Component {
         if (this.state.loggedIn) {
             return (
                 <Redirect to="blogs" />
+
             )
         }
         return (
-            // <div className="App">
-            <div class="container">
-                <input type="text" ref="username"/>
-                <input type="password" ref="password"/>
-                <button onClick={this.login}>Login</button>
+            <div className="container">
+                <div className="row">
+                    <div className="flex">
+                        <input type="text" ref="username" className="form-control" placeholder="Login"/>
+                        <input type="password" ref="password" className="form-control" placeholder="Password"/>
+                        <Button bsStyle="primary" onClick={this.login}>Login</Button>
+                    </div>
+                </div>
             </div>
-            // </div>
         );
     }
 }
